@@ -5,18 +5,16 @@
  */
 package game_o_x;
 
-
-
 /**
  *
  * @author Глеб
  */
 public class Main {
-   
-    public static void main (String[]args){
-    Game_O_X g = new Game_O_X();
-      
-    g.startGame();
-        
-}
+
+    public static void main(String[] args) {
+        Game_O_X g = new Game_O_X();
+
+        g.startGame();
+
+    }
 }

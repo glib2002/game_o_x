@@ -5,7 +5,6 @@
  */
 package game_o_x;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,122 +13,131 @@ import java.util.Scanner;
  */
 public class Game_O_X {
 
-    public static Scanner scanner = new Scanner(System.in);
-    public static char c[][] = new char[3][3];
+    public Scanner scanner = new Scanner(System.in);
+    public char[][] grid = new char[3][3];
 
-    public static void startGame() {
+    public void startGame() {
 
         int l = 0;
-        for (int b = 0; b < 3; b++) {
-            c[0][b] = 0;
-        }
 
-        for (int b = 0; b < 3; b++) {
-            c[1][b] = 0;
-        }
-        for (int b = 0; b < 3; b++) {
-            c[2][b] = 0;
-        }
-        for (int x = 0; x < 1;) {
-            System.out.println("Make enter");
-            System.out.println("X");
-            int userInput_X = Integer.parseInt(scanner.nextLine());
-            System.out.println("Y");
-            int userInput_Y = Integer.parseInt(scanner.nextLine());
-
-            if (c[userInput_X][userInput_Y] != 0) {
-                System.out.println("Please reenter");
-                System.out.println("X");
-                userInput_X = Integer.parseInt(scanner.nextLine());
-                System.out.println("Y");
-                userInput_Y = Integer.parseInt(scanner.nextLine());
-
+        for (int r = 0; r < 3; r++) {
+            for (int c = 0; c < 3; c++) {
+                grid[r][c] = 0;
             }
+        }
+
+        for (int x = 0; x < 1;) {
+            do {
+                System.out.println("Make enter (1-3)");
+                System.out.println("X");
+                int userInput_X = Integer.parseInt(scanner.nextLine()) - 1;
+                System.out.println("Y");
+                int userInput_Y = Integer.parseInt(scanner.nextLine()) - 1;
+
+                if (grid[userInput_X][userInput_Y] == 0) {
+                    grid[userInput_X][userInput_Y] = 2;
+                    break;
+                }
+            } while (true);
+            
+            
+            
+            if (validate(2)) {
+                
+            }
+
+            // TODO: LOOP HERE
             System.out.println("Comp enter");
             int compX = (int) (Math.random() * 3);
             int compY = (int) (Math.random() * 3);
-            if (c[userInput_X][userInput_Y] == 0) {
 
-                c[userInput_X][userInput_Y] = 2;
-            }
-            if (c[compX][compX] == 0){
-            c[compX][compY] = 1;
+            if (grid[compX][compX] == 0) {
+                grid[compX][compY] = 1;
             }
             System.out.println(compX + " " + compY);
             l++;
 
             if (l == 9) {
-                System.out.println("Drau");
+                System.out.println("Draw");
             }
 
-            if (c[compX][compY] != 0) {
+            if (grid[compX][compY] != 0) {
 
                 compX = (int) (Math.random() * 3);
                 compY = (int) (Math.random() * 3);
                 System.out.println("comp enter" + compX + " " + compY);
 
-            } else {
-                if (c[0][0] == 2 && c[1][1] == 2 && c[2][2] == 2) {
-                    System.out.println("You win");
-                    x++;
-                } else if (c[0][0] == 1 && c[1][1] == 1 && c[2][2] == 1) {
-                    System.out.println("You lose");
-                    x++;
-                }
-                //cor
-                if (c[1][0] == 2 && c[1][1] == 2 && c[1][2] == 2) {
-                    System.out.println("You win");
-                    x++;
-                } else if (c[1][0] == 1 && c[1][1] == 1 && c[1][2] == 1) {
-                    System.out.println("You lose");
-                    x++;
-                }
-                //cor
-                if (c[0][0] == 2 && c[0][1] == 2 && c[0][2] == 2) {
-                    System.out.println("You win");
-                    x++;
-                } else if (c[0][0] == 1 && c[0][1] == 1 && c[0][2] == 1) {
-                    System.out.println("You lose");
-                    x++;
-                }
-                //cor
-                if (c[2][0] == 2 && c[2][1] == 2 && c[2][2] == 2) {
-                    System.out.println("You win");
-                    x++;
-                } else if (c[2][0] == 1 && c[2][1] == 1 && c[2][2] == 1) {
-                    System.out.println("You lose");
-                    x++;
-                }//cor
-                if (c[0][0] == 2 && c[1][0] == 2 && c[2][0] == 2) {
-                    System.out.println("You win");
-                    x++;
-                } else if (c[0][0] == 1 && c[1][0] == 1 && c[2][0] == 1) {
-                    System.out.println("You lose");
-                    x++;
-                }//cor            
-                if (c[0][2] == 2 && c[1][2] == 2 && c[2][2] == 2) {
-                    System.out.println("You win");
-                    x++;
-                } else if (c[0][2] == 1 && c[1][2] == 1 && c[2][2] == 1) {
-                    System.out.println("You lose");
-                    x++;
-                }//cor
-                if (c[2][0] == 2 && c[1][1] == 2 && c[0][2] == 2) {
-                    System.out.println("You win");
-                    x++;
-                } else if (c[2][0] == 1 && c[1][1] == 1 && c[0][2] == 1) {
-                    System.out.println("You lose");
-                    x++;
-                }//cor
-                if (c[0][1] == 2 && c[1][1] == 2 && c[2][1] == 2) {
-                    System.out.println("You win");
-                    x++;
-                } else if (c[0][1] == 1 && c[1][1] == 1 && c[2][1] == 1) {
-                    System.out.println("You lose");
-                    x++;
-                }//cor
+            }
+            
+            if (validate(1)) {
+                
             }
 
+            // TODO: Optimize algorithm (for).
+            if (grid[0][0] == 2 && grid[1][1] == 2 && grid[2][2] == 2) {
+                System.out.println("You win");
+                x++;
+            } else if (grid[0][0] == 1 && grid[1][1] == 1 && grid[2][2] == 1) {
+                System.out.println("You lose");
+                x++;
+            }
+            
+            //cor
+            if (grid[2][0] == 2 && grid[2][1] == 2 && grid[2][2] == 2) {
+                System.out.println("You win");
+                x++;
+            } else if (grid[2][0] == 1 && grid[2][1] == 1 && grid[2][2] == 1) {
+                System.out.println("You lose");
+                x++;
+            }//cor
+            if (grid[0][0] == 2 && grid[1][0] == 2 && grid[2][0] == 2) {
+                System.out.println("You win");
+                x++;
+            } else if (grid[0][0] == 1 && grid[1][0] == 1 && grid[2][0] == 1) {
+                System.out.println("You lose");
+                x++;
+            }//cor            
+            if (grid[0][2] == 2 && grid[1][2] == 2 && grid[2][2] == 2) {
+                System.out.println("You win");
+                x++;
+            } else if (grid[0][2] == 1 && grid[1][2] == 1 && grid[2][2] == 1) {
+                System.out.println("You lose");
+                x++;
+            }//cor
+            if (grid[2][0] == 2 && grid[1][1] == 2 && grid[0][2] == 2) {
+                System.out.println("You win");
+                x++;
+            } else if (grid[2][0] == 1 && grid[1][1] == 1 && grid[0][2] == 1) {
+                System.out.println("You lose");
+                x++;
+            }//cor
+            if (grid[0][1] == 2 && grid[1][1] == 2 && grid[2][1] == 2) {
+                System.out.println("You win");
+                x++;
+            } else if (grid[0][1] == 1 && grid[1][1] == 1 && grid[2][1] == 1) {
+                System.out.println("You lose");
+                x++;
+            }//cor
+
         }
+    }
+
+    private boolean validate(int val) {
+        for (int i = 0; i < 3; i++) {
+            int k = 0;
+            
+            for (int j = 0; j < 3; j++) {
+                if (grid[i][j] == val) {
+                    k++;
+                }
+            }
+
+            if (k == 3) {
+                System.out.println("You win");
+                return true;
+            }
+        }
+
+        return false;
     }
 }
